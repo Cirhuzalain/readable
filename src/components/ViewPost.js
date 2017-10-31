@@ -8,28 +8,17 @@ import style from './style';
 import CommentContainer from './CommentContainer';
 
 class ViewPost extends Component {
-  state = {
-    open: false,
-  }
-
-  handleClose = () => {
-    this.setState({open : false});
-  }
-
-  handleOpen = () => {
-    this.setState({open : true});
-  }
 
   render() {
-
+    const post  = this.props.match.params.post;
     return (
       <div>
         <div className='content'>
           <Header title="Post" home={false} />
         </div>
-        <PostContainer />
-        <CommentContainer />
-        <Link to='/comment/create'>
+        <PostContainer post={post} />
+        <CommentContainer post={post} />
+        <Link to='/add/comment'>
           <FloatingActionButton style={style}>
             <ContentComment />
           </FloatingActionButton>

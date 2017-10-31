@@ -1,24 +1,40 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Category from './Category';
 import { Link } from 'react-router-dom';
+import keyIndex from 'react-key-index';
+import { connect } from 'react-redux';
 
-const CategoryContainer = () => {
-  const styles = {
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center'
-    }
-  };
-  const catLists = ["React", "Redux", "AI", "ML", "NLP", "CV", "DL", "RL", "DRL", "CNN", "RNN", "GAN"]
-  return (
-    <div className="container">
-      <h2 className='content'>Categories</h2>
-      <div style={styles.root}>
-        {catLists.map(cat => <Link to='/category'><Category key={cat} title={cat} /> </Link> )}
+class CategoryContainer extends Component {
+  constructor(){
+    super();
+    this.styles = {
+      root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+      }
+    };
+  }
+
+  render(){
+    return (
+      <div className="container">
+        <h2 className='content'>Categories</h2>
+        <div style={this.styles.root}>
+          {this.props.contents.categ && keyIndex(this.props.contents.categ, 1).map(cat => <Link to={`/${cat.name}`}><Category key={cat._nameId} title={cat.name} /> </Link> )}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
-export default CategoryContainer;
+function mapStateToProps(state){
+  return {contents  : state.loadData }
+}
+
+/*function mapDispatchToProps(dispatch){
+  return {
+    viewPostCategory : (data, store) => dispatch(viewCategoryInfo(data, store))
+  }
+}*/
+export default connect(mapStateToProps)(CategoryContainer);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './Home';
 import ViewCategory from './ViewCategory';
 import ViewPost from './ViewPost';
@@ -14,13 +14,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Route exact path='/' component={Home} />
-        <Route path='/category' component={ViewCategory} />
-        <Route exact path='/post' component={ViewPost} />
-        <Route path='/post/create' component={CreateContainer} />
-        <Route path='/comment/create' component={AddCommentContainer} />
-        <Route path='/post/edit' component={EditPost} />
-        <Route path='/comment/edit' component={EditComment} />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/:category' component={ViewCategory} />
+            <Route path='/add/post/' component={CreateContainer} />
+            <Route path='/add/comment' component={AddCommentContainer} />
+            <Route path='/post/edit' component={EditPost} />
+            <Route path='/comment/edit' component={EditComment} />
+            <Route path='/:category/:post' component={ViewPost} />
+          </Switch>
       </div>
     );
   }

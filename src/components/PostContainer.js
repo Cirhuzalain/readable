@@ -1,33 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link }from 'react-router-dom';
 import {Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import { connect } from 'react-redux';
 
-const PostDetail = () => {
-  return (
-    <div className='post-container'>
-      <Card>
-        <CardHeader
-          title="Post Title"
-          subtitle="Post by Alino"/>
-        <CardTitle title={`5 comments`} subtitle={`Vote : 10`}/>
-        <CardText>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-          Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-          Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-        </CardText>
-        <CardActions>
-          <RaisedButton icon={<ActionThumbUp />}  />
-          <RaisedButton icon={<ActionThumbDown />}  />
-          <Link to='/post/edit'><RaisedButton label="Edit" /></Link>
-          <RaisedButton label="Delete" />
-        </CardActions>
-      </Card>
-    </div>
-  )
+class  PostDetail extends Component {
+
+  render(){
+    const postInfo = this.props.posts[this.props.post];
+    return (
+      <div className='post-container'>
+        <Card>
+          <CardHeader
+            title={postInfo.title}
+            subtitle={`Post by ${postInfo.author}`} />
+          <CardTitle title={postInfo.comments.length > 1 ? `${postInfo.comments.length} comments` :  `${postInfo.comments.length} comment`}subtitle={postInfo.voteScore}/>
+          <CardText>
+            {postInfo.body}
+          </CardText>
+          <CardActions>
+            <RaisedButton icon={<ActionThumbUp />}  />
+            <RaisedButton icon={<ActionThumbDown />}  />
+            <Link to='/post/edit'><RaisedButton label="Edit" /></Link>
+            <RaisedButton label="Delete" />
+          </CardActions>
+        </Card>
+      </div>
+    )
+  }
 }
 
-export default PostDetail;
+function mapStateToProps(state){
+  return {
+    posts : state.loadData.posts
+  }
+}
+
+export default connect(mapStateToProps)(PostDetail);

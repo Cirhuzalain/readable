@@ -4,6 +4,7 @@ import { Card, CardHeader, CardText, CardActions, CardTitle } from 'material-ui/
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import { format } from 'date-fns';
 
 const Comment = (props) => {
   return (
@@ -13,8 +14,8 @@ const Comment = (props) => {
           title={`Posted by ${props.info.author}`}
           actAsExpander={true}
           showExpandableButton={true}
-          subtitle={props.info.date}/>
-        <CardTitle subtitle={`Score : 8`} />
+          subtitle={format(new Date(props.info.timestamp), 'MM/DD/YYYY')}/>
+        <CardTitle subtitle={props.info.voteScore} />
         <CardText expandable={true}>
           {props.info.body}
         </CardText>

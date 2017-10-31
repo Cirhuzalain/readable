@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Post from './Post';
+import { connect } from 'react-redux';
 import SortPost from './SortPost';
 
 class PostsContainer extends Component {
@@ -15,41 +16,28 @@ class PostsContainer extends Component {
     }
   };
 
-  infos = [
-    {
-      title : "React",
-      date : "25/07/2017",
-      comment : "Comming soon !!!",
-      count : 10,
-      score : 5
-    },
-    {
-      title : "React Native",
-      date : "15/09/2017",
-      comment : "Comming soon !!!",
-      count : 15,
-      score : 6
-    },
-    {
-      title : "Redux",
-      date : "15/08/2017",
-      comment : "Comming soon !!!",
-      count : 20,
-      score : 6
-    }
-  ];
-
   render(){
+    let postsInfos = []
+    if (this.props.category && this.props.contents.posts){
+      postsInfos = Object.values(this.props.contents.posts).filter(data => data.category === this.props.category)
+    } else if (this.props.contents.posts) {
+      postsInfos = Object.values(this.props.contents.posts)
+    }
     return (
       <div className='container'>
         <h2 className='content'>Posts</h2>
         <SortPost />
         <div>
-          {this.infos.map(data => <Post key={data.title} info={data}/> )}
+          {
+            postsInfos.map(data => <Post key={data.id} info={data} /> )
+          }
         </div>
       </div>
     )
   }
 }
 
-export default PostsContainer;
+function mapStateToProps(state){
+  return {contents  : state.loadData }
+}
+export default connect(mapStateToProps)(PostsContainer);

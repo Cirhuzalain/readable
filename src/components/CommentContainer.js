@@ -1,35 +1,27 @@
 import React, { Component } from 'react';
 import SortPost from './SortPost';
 import Comment from './Comment';
+import { connect } from 'react-redux';
 
 class CommentContainer extends Component {
-  infos = [
-    {
-      author : "Alino",
-      date : "25/07/2017",
-      body : "Comming soon !!!"
-    },
-    {
-      author : "John",
-      date : "15/09/2017",
-      body : "Comming soon !!!"
-    },
-    {
-      author : "Peter",
-      date : "15/08/2017",
-      body : "Comming soon !!!"
-    }
-  ];
 
   render(){
+    let commentInfos = [];
+    if(this.props.comments){
+      commentInfos =  Object.values(this.props.comments).filter(comment => comment.parentId === this.props.post);
+    }
     return (
       <div className='container'>
         <h2 className='content'>Comments</h2>
         <SortPost />
-        {this.infos.map(data => <Comment key={data.author} info={data} />)}
+        {commentInfos.map(data => <Comment key={data.id} info={data} />)}
       </div>
     )
   }
 }
 
-export default CommentContainer;
+function mapStateToProps(state){
+  return { comments : state.loadData.comments}
+}
+
+export default connect(mapStateToProps)(CommentContainer);
