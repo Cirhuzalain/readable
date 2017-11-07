@@ -1,5 +1,6 @@
-import React from 'react';
-import {Card, CardHeader} from 'material-ui/Card';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {Card, CardHeader} from 'material-ui/Card'
 
 
 const Category = (props) => {
@@ -11,4 +12,8 @@ const Category = (props) => {
   )
 }
 
-export default Category;
+Category.propTypes = {
+  title : PropTypes.string.isRequired
+}
+
+export default Category

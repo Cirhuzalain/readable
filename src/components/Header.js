@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-//import createHistory from 'history/createBrowserHistory';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/arrow-back';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import AppBar from 'material-ui/AppBar'
+import IconButton from 'material-ui/IconButton'
+import NavigationClose from 'material-ui/svg-icons/navigation/arrow-back'
 
 const Header = (props) => {
   if (props.home){
@@ -21,4 +21,9 @@ const Header = (props) => {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  home : PropTypes.bool.isRequired,
+  title : PropTypes.string.isRequired
+}
+
+export default Header

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import Header from './Header';
-import CategoryContainer from './CategoryContainer';
-import style from './style.js';
-import PostsContainer from './PostsContainer';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
+import Header from './Header'
+import CategoryContainer from './CategoryContainer'
+import style from './style.js'
+import PostsContainer from './PostsContainer'
 
 class ViewCategory extends Component {
 
@@ -18,7 +18,7 @@ class ViewCategory extends Component {
         </div>
         <CategoryContainer />
         <PostsContainer category={catName} />
-        <Link to='/post/create'>
+        <Link to={`/add/post/${catName}`}>
           <FloatingActionButton style={style}>
             <ContentAdd />
           </FloatingActionButton>
@@ -28,4 +28,4 @@ class ViewCategory extends Component {
   }
 }
 
-export default ViewCategory;
+export default ViewCategory

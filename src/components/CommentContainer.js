@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import SortPost from './SortPost';
-import Comment from './Comment';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import Comment from './Comment'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 class CommentContainer extends Component {
 
   render(){
-    let commentInfos = [];
+
+    let commentInfos = []
     if(this.props.comments){
-      commentInfos =  Object.values(this.props.comments).filter(comment => comment.parentId === this.props.post);
+      commentInfos =  Object.values(this.props.comments).filter(comment => comment.parentId === this.props.post)
     }
     return (
       <div className='container'>
-        <h2 className='content'>Comments</h2>
-        <SortPost />
+        {commentInfos.length > 0 && <h2 className='content'>Comments</h2>}
         {commentInfos.map(data => <Comment key={data.id} info={data} />)}
       </div>
     )
@@ -24,4 +24,8 @@ function mapStateToProps(state){
   return { comments : state.loadData.comments}
 }
 
-export default connect(mapStateToProps)(CommentContainer);
+CommentContainer.propTypes = {
+  comments : PropTypes.object.isRequired
+}
+
+export default connect(mapStateToProps)(CommentContainer)

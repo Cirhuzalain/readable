@@ -1,32 +1,77 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import {Card, CardHeader, CardText, CardActions, CardTitle} from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up';
-import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down';
-import { format } from 'date-fns';
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import {Card, CardHeader, CardText, CardActions, CardTitle} from 'material-ui/Card'
+import RaisedButton from 'material-ui/RaisedButton'
+import ActionThumbUp from 'material-ui/svg-icons/action/thumb-up'
+import ActionThumbDown from 'material-ui/svg-icons/action/thumb-down'
+import { connect } from 'react-redux'
+import { upVotePostContent, downVotePostContent, deletePostContent } from '../actions'
 
-const Post = (props) => {
-  return (
-    <div>
-      <Card>
-        <CardHeader
-          title={`${props.info.title}`}
-          actAsExpander={true}
-          showExpandableButton={true}
-          subtitle={format(new Date(props.info.timestamp), 'MM/DD/YYYY')} />
-        <CardTitle title={props.info.comments.length > 1 ? `${props.info.comments.length} comments` :  `${props.info.comments.length} comment`} subtitle={`Vote : ${props.info.voteScore}`}/>
-        <CardText expandable={true}>
-          {props.info.body}
-        </CardText>
-        <CardActions>
-          <RaisedButton icon={<ActionThumbUp />}  />
-          <RaisedButton icon={<ActionThumbDown />}  />
-          <Link to={`/${props.info.category}/${props.info.id}`}><RaisedButton label="View Detail" /></Link>
-        </CardActions>
-      </Card>
-    </div>
-  )
+class Post extends Component {
+
+
+  upVotePost = (post, props) => {
+    return function(e){
+      props.upVotePostInfo(post)
+    }
+  }
+
+  downVotePost = (post, props) => {
+    return function(e){
+      props.downVotePostInfo(post)
+    }
+  }
+
+  deletePost = (post, props) => {
+    return function(e){
+      props.deletePostInfo(post)
+    }
+  }
+
+  render(){
+    return (
+      <div>
+        <Card>
+          <CardHeader
+            title={`${this.props.info.title}`}
+            actAsExpander={true}
+            showExpandableButton={true}
+            subtitle={`Post by ${this.props.info.author}`} />
+          <CardTitle title={this.props.info.commentCount > 1 ? `${this.props.info.commentCount} comments` :  `${this.props.info.commentCount} comment`} subtitle={`Vote : ${this.props.info.voteScore}`}/>
+          <CardText expandable={true}>
+            {this.props.info.body}
+          </CardText>
+          <CardActions>
+            <RaisedButton onClick={this.upVotePost(this.props.info, this.props)} icon={<ActionThumbUp />}  />
+            <RaisedButton onClick={this.downVotePost(this.props.info, this.props)} icon={<ActionThumbDown />}  />
+            <RaisedButton onClick={this.deletePost(this.props.info, this.props)} label="Delete" />
+            <Link to={`/post/edit/${this.props.info.id}`}><RaisedButton label="Edit" /></Link>
+            <Link to={`/${this.props.info.category}/${this.props.info.id}`}><RaisedButton label="View Detail" /></Link>
+          </CardActions>
+        </Card>
+      </div>
+    )
+  }
 }
 
-export default Post;
+function mapStateToProps(state){
+  return {content : state}
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    deletePostInfo : (post) => dispatch(deletePostContent(post)),
+    upVotePostInfo : (post) => dispatch(upVotePostContent(post)),
+    downVotePostInfo : (post) => dispatch(downVotePostContent(post))
+  }
+}
+
+Post.propTypes = {
+  content : PropTypes.object.isRequired,
+  deletePostInfo : PropTypes.func.isRequired,
+  upVotePostInfo : PropTypes.func.isRequired,
+  downVotePostInfo : PropTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post)

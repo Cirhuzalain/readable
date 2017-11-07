@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
-import Post from './Post';
-import { connect } from 'react-redux';
-import SortPost from './SortPost';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Post from './Post'
+import { connect } from 'react-redux'
+import SortPost from './SortPost'
 
 class PostsContainer extends Component {
 
@@ -25,8 +26,8 @@ class PostsContainer extends Component {
     }
     return (
       <div className='container'>
-        <h2 className='content'>Posts</h2>
-        <SortPost />
+        {postsInfos.length > 0 && <h2 className='content'>Posts</h2>}
+        {postsInfos.length > 0 && <SortPost /> }
         <div>
           {
             postsInfos.map(data => <Post key={data.id} info={data} /> )
@@ -40,4 +41,9 @@ class PostsContainer extends Component {
 function mapStateToProps(state){
   return {contents  : state.loadData }
 }
-export default connect(mapStateToProps)(PostsContainer);
+
+PostsContainer.propTypes = {
+  contents : PropTypes.object.isRequired
+}
+
+export default connect(mapStateToProps)(PostsContainer)

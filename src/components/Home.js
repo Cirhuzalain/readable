@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import Header from './Header';
-import CategoryContainer from './CategoryContainer';
-import style from './style.js';
-import PostsContainer from './PostsContainer';
+import React, {Component} from 'react'
+import { Link } from 'react-router-dom'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
+import Header from './Header'
+import CategoryContainer from './CategoryContainer'
+import style from './style.js'
+import PostsContainer from './PostsContainer'
 
 class Home extends Component {
 
@@ -17,7 +17,7 @@ class Home extends Component {
         </div>
         <CategoryContainer />
         <PostsContainer />
-        <Link to='/add/post'>
+        <Link to='/add/post/all'>
           <FloatingActionButton style={style}>
             <ContentAdd />
           </FloatingActionButton>
@@ -27,4 +27,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Home
