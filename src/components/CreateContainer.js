@@ -28,7 +28,7 @@ class CreateContainer extends Component{
   handleSubmit = (e) => {
     e.preventDefault();
     const values = serializeForm(e.target, {hash : true})
-    const {name, post, details} = values
+    let {name, post, details} = values
 
     if (!name){
       this.setState({name : 'Name is required'})
@@ -39,7 +39,7 @@ class CreateContainer extends Component{
     if (!details){
       this.setState({details : 'Post detail is required'})
     }
-    else if (name.length < 2 || post.length < 2 || details.length < 2){
+    else if (name.trim().length < 2 || post.trim().length < 2 || details.trim().length < 2){
       this.setState({name : 'Short name or post title or post details (>= 2 characters)'})
     } else {
       this.setState({name : '', title : '', details : ''})

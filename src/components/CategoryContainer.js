@@ -4,18 +4,9 @@ import Category from './Category'
 import { Link } from 'react-router-dom'
 import keyIndex from 'react-key-index'
 import { connect } from 'react-redux'
+import style from './style'
 
 class CategoryContainer extends Component {
-  constructor(props){
-    super(props);
-    this.styles = {
-      root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center'
-      }
-    };
-  }
 
   render(){
     let categInfos = []
@@ -26,7 +17,7 @@ class CategoryContainer extends Component {
     return (
       <div className="container">
         <h2 className='content'>Categories</h2>
-        <div style={this.styles.root}>
+        <div style={style.root}>
           {categInfos.map((cat, index)=> <Link key={index} to={`/${cat.name}`}><Category key={cat._nameId} title={cat.name} /> </Link> )}
         </div>
       </div>

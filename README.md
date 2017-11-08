@@ -13,6 +13,10 @@ Use `npm install` command
 ## Run the project
 Use `npm start` command
 
+## Clone, Install dependency and Run the backend Server
+Use `git clone https://github.com/udacity/reactnd-project-readable-starter.git` then `cd reactnd-project-readable-starter/; cd api-server/; npm install`
+After that you can start the server with this command `node node server.js`
+
 ## Built with
 * ReactJS
 * Redux

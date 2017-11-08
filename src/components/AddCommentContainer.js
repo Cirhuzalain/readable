@@ -28,7 +28,7 @@ class AddCommentContainer extends Component {
     if (!description){
       this.setState({description : 'Description is required'})
     }
-    else if (author.length < 2 || description.length < 2 ){
+    else if (author.trim().length < 2 || description.trim().length < 2 ){
       this.setState({author : 'Short author name or comment description (>= 2 characters)'})
     } else {
       this.setState({author : '', description : ''})

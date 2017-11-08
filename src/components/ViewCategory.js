@@ -19,7 +19,7 @@ class ViewCategory extends Component {
         <CategoryContainer />
         <PostsContainer category={catName} />
         <Link to={`/add/post/${catName}`}>
-          <FloatingActionButton style={style}>
+          <FloatingActionButton style={style.fab}>
             <ContentAdd />
           </FloatingActionButton>
         </Link>

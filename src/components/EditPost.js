@@ -27,7 +27,7 @@ class EditPost extends Component{
     if (!details){
       this.setState({details : 'Post detail is required'})
     }
-    else if (post.length < 2 || details.length < 2){
+    else if (post.trim().length < 2 || details.trim().length < 2){
       this.setState({name : 'Short post title or post details (>= 2 characters)'})
     } else {
       this.setState({title : '', details : ''})

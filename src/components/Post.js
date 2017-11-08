@@ -68,6 +68,7 @@ function mapDispatchToProps(dispatch){
 }
 
 Post.propTypes = {
+  info : PropTypes.object.isRequired,
   content : PropTypes.object.isRequired,
   deletePostInfo : PropTypes.func.isRequired,
   upVotePostInfo : PropTypes.func.isRequired,

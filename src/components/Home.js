@@ -18,7 +18,7 @@ class Home extends Component {
         <CategoryContainer />
         <PostsContainer />
         <Link to='/add/post/all'>
-          <FloatingActionButton style={style}>
+          <FloatingActionButton style={style.fab}>
             <ContentAdd />
           </FloatingActionButton>
         </Link>

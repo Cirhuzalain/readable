@@ -21,7 +21,7 @@ class ViewPost extends Component {
         <PostContainer postinfo={info} />
         <CommentContainer post={post} />
         <Link to={`/add/comment/${post}`}>
-          <FloatingActionButton style={style}>
+          <FloatingActionButton style={style.fab}>
             <ContentComment />
           </FloatingActionButton>
         </Link>

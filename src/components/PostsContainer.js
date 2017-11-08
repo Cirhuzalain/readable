@@ -6,17 +6,6 @@ import SortPost from './SortPost'
 
 class PostsContainer extends Component {
 
-  styles = {
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'center'
-    },
-    sort: {
-      justifyContent: 'end',
-    }
-  };
-
   render(){
     let postsInfos = []
     if (this.props.category && this.props.contents.posts){

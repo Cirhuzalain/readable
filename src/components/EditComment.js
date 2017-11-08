@@ -25,7 +25,7 @@ class EditComment extends Component{
     if (!comment){
       this.setState({description : 'Comment description is required'})
     }
-    else if (comment.length < 2){
+    else if (comment.trim().length < 2){
       this.setState({description : 'Short comment description (>= 2 characters)'})
     } else {
       this.setState({description : ''})
